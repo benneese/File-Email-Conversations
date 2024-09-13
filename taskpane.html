@@ -10,7 +10,7 @@
 	</head>
 
 	<body>
-		<p>This add-in will insert the text 'Hello world!' in a new message.</p>
+		<p>This add-in will insert the text 'Hello Ben!' in a new message.</p>
 		<button id="helloButton">Say hello</button>
 	</body>
 
@@ -26,7 +26,7 @@
 		 */
 		function sayHello() {
 			Office.context.mailbox.item.body.setAsync(
-				"Hello world!",
+				"Hello Ben!",
 				{
 					coercionType: "html", // Write text as HTML
 				},
