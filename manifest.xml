@@ -3,7 +3,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
   xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0" xsi:type="MailApp">
-  <Id>e2d0f23e-6c0d-40f4-bf56-040fe0e70c0a</Id>
+  <Id>59fb4fd5-665d-4bbc-8203-4d927af7f037</Id>
   <Version>1.0.0.0</Version>
   <ProviderName>Ben Neese</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
@@ -20,65 +20,18 @@
   </Hosts>
   <Requirements>
     <Sets>
-      <Set Name="Mailbox" MinVersion="1.8"/>
+      <Set Name="Mailbox" MinVersion="1.1"/>
     </Sets>
   </Requirements>
-  <VersionOverrides Version="1.0">
-      <Hosts>
-        <Host xsi:type="Mailbox">
-          <ExtensionPoint xsi:type="MessageReadCommandSurface">
-            <OfficeTab id="TabDefault">
-              <Group id="msgReadGroup">
-                <Label resid="groupLabel"/>
-                <Control xsi:type="Button" id="runJavaScriptButton">
-                  <Label resid="buttonLabel"/>
-                  <Supertip>
-                    <Title resid="buttonLabel"/>
-                    <Description resid="buttonDescription"/>
-                  </Supertip>
-                  <Icon>
-                    <bt:Image size="16" resid="icon16"/>
-                    <bt:Image size="32" resid="icon32"/>
-                    <bt:Image size="80" resid="icon80"/>
-                  </Icon>
-                  <Action xsi:type="ExecuteFunction">
-                    <FunctionName>runJavaScript</FunctionName>
-                  </Action>
-                </Control>
-              </Group>
-            </OfficeTab>
-          </ExtensionPoint>
-        </Host>
-      </Hosts>
-      <Resources>
-        <bt:Images>
-          <bt:Image id="icon16" DefaultValue="https://benneese.github.io/File-Email-Conversations/assets/folder-tree-icon-16.png"/>
-          <bt:Image id="icon32" DefaultValue="https://benneese.github.io/File-Email-Conversations/assets/folder-tree-icon-32.png"/>
-          <bt:Image id="icon80" DefaultValue="https://benneese.github.io/File-Email-Conversations/assets/folder-tree-icon-80.png"/>
-        </bt:Images>
-        <bt:Urls>
-          <bt:Url id="functionFile" DefaultValue="https://benneese.github.io/File-Email-Conversations/function-file.html"/>
-        </bt:Urls>
-        <bt:ShortStrings>
-          <bt:String id="groupLabel" DefaultValue="My Group"/>
-          <bt:String id="buttonLabel" DefaultValue="File Email"/>
-        </bt:ShortStrings>
-        <bt:LongStrings>
-          <bt:String id="buttonDescription" DefaultValue="This button files the email in the same folder as the rest of the conversation."/>
-        </bt:LongStrings>
-      </Resources>
-      <FunctionFile resid="functionFile"/>
-    </VersionOverrides>
-  </OfficeApp>
-  <!-- <FormSettings>
+  <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://benneese.github.io/File-Email-Conversations/taskpane.html"/>
+        <SourceLocation DefaultValue="https://benneese.github.io/File-Email-Conversations/function-file.html"/>
         <RequestedHeight>250</RequestedHeight>
       </DesktopSettings>
     </Form>
-  </FormSettings> -->
-  <!-- <Permissions>ReadWriteItem</Permissions>
+  </FormSettings>
+  <Permissions>ReadWriteItem</Permissions>
   <Rule xsi:type="RuleCollection" Mode="Or">
     <Rule xsi:type="ItemIs" ItemType="Appointment" FormType="Edit"/>
     <Rule xsi:type="ItemIs" ItemType="Message" FormType="Edit"/>
@@ -94,75 +47,47 @@
       <Host xsi:type="MailHost">
         <DesktopFormFactor>
           <FunctionFile resid="functionFile"/>
-          <!-- Message Compose -->
-          <ExtensionPoint xsi:type="MessageComposeCommandSurface">
+          <ExtensionPoint xsi:type="MessageReadCommandSurface">
             <OfficeTab id="TabDefault">
-              <Group id="msgComposeCmdGroup">
+              <Group id="msgReadGroup">
                 <Label resid="CommandsGroup.Label"/>
-                <Control xsi:type="Button" id="msgComposeInsertGist">
+                <Control xsi:type="Button" id="runJavaScriptButton">
                   <Label resid="TaskpaneButton.Label"/>
                   <Supertip>
                     <Title resid="TaskpaneButton.SupertipTitle"/>
                     <Description resid="TaskpaneButton.SupertipText"/>
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="Icon.16x16"/>
-                    <bt:Image size="32" resid="Icon.32x32"/>
-                    <bt:Image size="80" resid="Icon.80x80"/>
-                  </Icon>
-                  <Action xsi:type="ShowTaskpane">
-                    <SourceLocation resid="Taskpane.Url"/>
-                  </Action>
-                </Control>
-              </Group>
-            </OfficeTab>
-          </ExtensionPoint> -->
-          <!-- Message Read-->
-          <!-- <ExtensionPoint xsi:type="MessageReadCommandSurface">
-            <OfficeTab id="TabDefault">
-              <Group id="msgReadCmdGroup">
-                <Label resid="groupLabel"/>
-                <Control xsi:type="Button" id="msgReadActionButton"/>
-                  <Label resid="actionButtonLabel"/>
-                  <Supertip>
-                    <Title resid="actionButtonLabel"/>
-                    <Description resid="actionButtonDescription"/>
-                  </Supertip>
-                  <Icon>
-                    <bt:Image size="16" resid="Icon.16x16"/>
-                    <bt:Image size="32" resid="Icon.32x32"/>
-                    <bt:Image size="80" resid="Icon.80x80"/>
+                    <bt:Image size="16" resid="icon16"/>
+                    <bt:Image size="32" resid="icon32"/>
+                    <bt:Image size="80" resid="icon80"/>
                   </Icon>
                   <Action xsi:type="ExecuteFunction">
-                    <FunctionName>action</FunctionName>
+                    <FunctionName>runJavaScript</FunctionName>
                   </Action>
                 </Control>
               </Group>
             </OfficeTab>
-          </ExtensionPoint> -->
+          </ExtensionPoint>
         </DesktopFormFactor>
       </Host>
     </Hosts>
     <Resources>
       <bt:Images>
-        <bt:Image id="Icon.16x16" DefaultValue="https://benneese.github.io/File-Email-Conversations/assets/folder-tree-icon-16.png"/>
-        <bt:Image id="Icon.32x32" DefaultValue="https://benneese.github.io/File-Email-Conversations/assets/folder-tree-icon-32.png"/>
-        <bt:Image id="Icon.80x80" DefaultValue="https://benneese.github.io/File-Email-Conversations/assets/folder-tree-icon-80.png"/>
+        <bt:Image id="icon16" DefaultValue="https://benneese.github.io/File-Email-Conversations/assets/folder-tree-icon-16.png"/>
+        <bt:Image id="icon32" DefaultValue="https://benneese.github.io/File-Email-Conversations/assets/folder-tree-icon-32.png"/>
+        <bt:Image id="icon80" DefaultValue="https://benneese.github.io/File-Email-Conversations/assets/folder-tree-icon-80.png"/>
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="functionFile" DefaultValue="https://benneese.github.io/File-Email-Conversations/commands.html"/>
-        <bt:Url id="Taskpane.Url" DefaultValue="https://benneese.github.io/File-Email-Conversations/taskpane.html"/>
+        <bt:Url id="functionFile" DefaultValue="https://benneese.github.io/File-Email-Conversations/function-file.html"/>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="groupLabel" DefaultValue="A test group label"/>
-        <bt:String id="CommandsGroup.Label" DefaultValue="File Email Addin v1.0.1"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="File Email v1.0.1"/>
-        <bt:String id="TaskpaneButton.SupertipTitle" DefaultValue="File Email v1.0.1"/>
-        <bt:String id="actionButtonLabel" DefaultValue="Do an action"/>
-        <bt:String id="actionButtonDescription" DefaultValue="Describe an action"/>
+        <bt:String id="CommandsGroup.Label" DefaultValue="Email Organizer"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Email Organizer"/>
+        <bt:String id="TaskpaneButton.SupertipTitle" DefaultValue="Email Organizer"/>
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="TaskpaneButton.SupertipText" DefaultValue="File email with conversation"/>
+        <bt:String id="TaskpaneButton.SupertipText" DefaultValue="File Email with Conversation"/>
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
