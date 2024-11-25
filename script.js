@@ -2,14 +2,6 @@ Office.initialize = function () {
 	console.log("Office initialized");
 };
 
-Office.context.mailbox.makeEwsRequestAsync(request, (result) => {
-	if (result.status === Office.AsyncResultStatus.Failed) {
-		console.error(result.error.message);
-	} else {
-		console.log(result.value);
-	}
-});
-
 async function runJavaScript(event) {
 	try {
 		await moveEmailToConversationFolder();
@@ -74,19 +66,19 @@ async function moveEmailToConversationFolder() {
 function searchMailbox(query, options) {
 	return new Promise((resolve, reject) => {
 		const searchRequest = `
-      <m:FindItem xmlns:m="http://schemas.microsoft.com/exchange/services/2006/messages" xmlns:t="http://schemas.microsoft.com/exchange/services/2006/types">
+		<m:FindItem xmlns:m="http://schemas.microsoft.com/exchange/services/2006/messages" xmlns:t="http://schemas.microsoft.com/exchange/services/2006/types">
         <m:ItemShape>
-          <t:BaseShape>IdOnly</t:BaseShape>
+		<t:BaseShape>IdOnly</t:BaseShape>
         </m:ItemShape>
         <m:IndexedPageItemView MaxEntriesReturned="${options.top}" Offset="0" BasePoint="Beginning" />
         <m:Restriction>
-          <t:Contains ContainmentMode="Substring" ContainmentComparison="IgnoreCase">
-            <t:FieldURI FieldURI="item:ConversationId"/>
-            <t:Constant Value="${query}" />
-          </t:Contains>
+		<t:Contains ContainmentMode="Substring" ContainmentComparison="IgnoreCase">
+		<t:FieldURI FieldURI="item:ConversationId"/>
+		<t:Constant Value="${query}" />
+		</t:Contains>
         </m:Restriction>
-      </m:FindItem>
-    `;
+		</m:FindItem>
+		`;
 
 		Office.context.mailbox.makeEwsRequestAsync(searchRequest, (result) => {
 			if (result.status === Office.AsyncResultStatus.Succeeded) {
@@ -105,20 +97,22 @@ function searchMailbox(query, options) {
 function moveItem(itemId, folderId) {
 	return new Promise((resolve, reject) => {
 		const moveRequest = `
-      <m:MoveItem xmlns:m="http://schemas.microsoft.com/exchange/services/2006/messages">
+		<m:MoveItem xmlns:m="http://schemas.microsoft.com/exchange/services/2006/messages">
         <m:ToFolderId>
-          <t:FolderId Id="${folderId}" />
+		<t:FolderId Id="${folderId}" />
         </m:ToFolderId>
         <m:ItemIds>
           <t:ItemId Id="${itemId}" />
-        </m:ItemIds>
+		  </m:ItemIds>
       </m:MoveItem>
-    `;
+	  `;
 
 		Office.context.mailbox.makeEwsRequestAsync(moveRequest, (result) => {
 			if (result.status === Office.AsyncResultStatus.Succeeded) {
+				console.log(result.value);
 				resolve();
 			} else {
+				console.error(result.error.message);
 				reject(new Error(result.error.message));
 			}
 		});
