@@ -82,12 +82,14 @@ function searchMailbox(query, options) {
 
 		Office.context.mailbox.makeEwsRequestAsync(searchRequest, (result) => {
 			if (result.status === Office.AsyncResultStatus.Succeeded) {
+				console.log(result.value);
 				const response = parseXml(result.value);
 				const items =
 					response.Body.ResponseMessages.FindItemResponseMessage.RootFolder
 						.Items.Message;
 				resolve(items || []);
 			} else {
+				console.error(result.error.message);
 				reject(new Error(result.error.message));
 			}
 		});
@@ -109,10 +111,8 @@ function moveItem(itemId, folderId) {
 
 		Office.context.mailbox.makeEwsRequestAsync(moveRequest, (result) => {
 			if (result.status === Office.AsyncResultStatus.Succeeded) {
-				console.log(result.value);
 				resolve();
 			} else {
-				console.error(result.error.message);
 				reject(new Error(result.error.message));
 			}
 		});
