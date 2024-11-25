@@ -2,6 +2,14 @@ Office.initialize = function () {
 	console.log("Office initialized");
 };
 
+Office.context.mailbox.makeEwsRequestAsync(request, (result) => {
+	if (result.status === Office.AsyncResultStatus.Failed) {
+		console.error(result.error.message);
+	} else {
+		console.log(result.value);
+	}
+});
+
 async function runJavaScript(event) {
 	try {
 		await moveEmailToConversationFolder();
